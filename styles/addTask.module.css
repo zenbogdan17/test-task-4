@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  width: 100%;
+  color: var(--white);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  position: relative;
+}
+
+.form button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.title {
+  font-size: 30px;
+  text-align: center;
+}
+
+.checkbox_title {
+  font-size: 15px;
+  margin: 8px 0;
+}
+
+.checkbox {
+  display: flex;
+  gap: 10px;
+}
+
+.checkbox input {
+  cursor: pointer;
+}
+
+.checkbox_Label {
+  margin-left: 5px;
+  font-size: 15px;
+  color: var(--grey);
+  cursor: pointer;
+}

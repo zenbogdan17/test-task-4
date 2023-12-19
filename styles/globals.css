@@ -1,0 +1,33 @@
+:root {
+  height: 100%;
+
+  --bg: #212121;
+  --bg2: #1f1f1f;
+  --dark: #191919;
+  --dark-sea: #576067;
+  --dark-sea2: #383d41;
+  --grey: #b8b8b8;
+  --white: #fff;
+  --violet: #5d2dab;
+  --violet-dark: #4e2989;
+  --light: #f6f6f7;
+  --sea: #616e74;
+  --black: #131212;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+a,
+p,
+input {
+  color: var(--white);
+}
+
+a {
+  text-decoration: none;
+}

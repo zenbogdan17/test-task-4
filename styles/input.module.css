@@ -1,0 +1,11 @@
+.container {
+}
+
+.container input {
+  width: 30vw;
+  background: var(--bg2);
+  padding: 10px 5px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 2px 2px 2px var(--violet);
+}

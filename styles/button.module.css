@@ -1,0 +1,28 @@
+button {
+  width: 80px;
+  height: 30px;
+  color: var(--white);
+  background-color: var(--violet);
+  border: none;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  transition: all 0.5s;
+  box-shadow: 2px 2px 2px var(--dark);
+}
+
+button:hover {
+  transition: all 0.5s;
+  transform: scale(1.05);
+  box-shadow: 5px 5px 5px var(--dark);
+}
+
+.danger {
+  background-color: red;
+}
+
+.finished {
+  background-color: rgb(27, 156, 27);
+}
