@@ -48,16 +48,16 @@ select:focus {
   transition: background-color 0.3s ease;
 }
 
+.task_box:hover {
+  background-color: var(--dark);
+  transition: background-color 0.3s ease;
+}
+
 .task {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 5px;
-}
-
-.task_box:hover {
-  background-color: var(--dark);
-  transition: background-color 0.3s ease;
+  gap: 10px;
 }
 
 .task h3 {
@@ -65,7 +65,7 @@ select:focus {
 }
 
 .task span {
-  font-size: 15px;
+  font-size: 12px;
   color: var(--grey);
 }
 
