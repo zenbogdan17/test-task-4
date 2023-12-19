@@ -11,7 +11,7 @@ const items = [
   { id: 3, label: 'High' },
 ];
 
-const AddTask = ({ setTaskList }) => {
+const AddTask = ({ setNewTask }) => {
   const [task, setTask] = useState('');
   const [selectedItemId, setSelectedItemId] = useState(null);
 
@@ -37,7 +37,7 @@ const AddTask = ({ setTaskList }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setTaskList(data);
+        setNewTask(data);
 
         toast.success('Successfully added task!');
       })

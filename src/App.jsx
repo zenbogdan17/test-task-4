@@ -6,6 +6,7 @@ import AddTask from './components/AddTask';
 
 function App() {
   const [taskList, setTaskList] = useState(null);
+  const [newTask, setNewTask] = useState([]);
 
   useEffect(() => {
     fetch(url)
@@ -16,11 +17,11 @@ function App() {
       .catch((error) => {
         console.error('Fetch error:', error);
       });
-  }, []);
+  }, [newTask]);
 
   return (
     <div>
-      <AddTask setTaskList={(data) => setTaskList((prev) => [...prev, data])} />
+      <AddTask setNewTask={(data) => setNewTask((prev) => [...prev, data])} />
       <TaskList taskList={taskList} />
     </div>
   );
