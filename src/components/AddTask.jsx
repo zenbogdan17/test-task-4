@@ -40,6 +40,9 @@ const AddTask = ({ setNewTask }) => {
         setNewTask(data);
 
         toast.success('Successfully added task!');
+
+        setTask('');
+        setSelectedItemId(null);
       })
       .catch((error) => {
         console.error('Error:', error);
