@@ -52,6 +52,7 @@ select:focus {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 5px;
 }
 
 .task_box:hover {
@@ -61,6 +62,11 @@ select:focus {
 
 .task h3 {
   font-size: medium;
+}
+
+.task span {
+  font-size: 15px;
+  color: var(--grey);
 }
 
 .status_task {

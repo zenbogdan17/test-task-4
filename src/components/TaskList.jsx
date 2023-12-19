@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BeatLoader } from 'react-spinners';
 import { SlExclamation, SlCheck } from 'react-icons/sl';
 import { RiSortAsc, RiSortDesc } from 'react-icons/ri';
-
+import { format } from 'date-fns';
 import Button from './Button';
 import styles from './../../styles/taskList.module.css';
 import { url } from '../constants';
@@ -140,55 +140,61 @@ const TaskList = ({ taskList }) => {
               </div>
             </div>
 
-            {filteredTaskList.map(({ id, task, status, priority }) => (
-              <div
-                className={styles.task_box}
-                onClick={() => {
-                  setTaskSelectedId(taskSelectedId === id ? '' : id);
-                }}
-                key={id}
-              >
-                <div className={styles.task}>
-                  <div>
-                    <h3>{task}</h3>
-                  </div>
-                  <div className={styles.status_task}>
-                    {!status && (
-                      <div>
-                        <h4>Priority</h4>
-                        <p
-                          className={`${priority === 'Low' && styles.low} ${
-                            priority === 'Medium' && styles.medium
-                          } ${priority === 'High' && styles.high}`}
-                        >
-                          {priority}
-                        </p>
-                      </div>
-                    )}
-
-                    <p>
-                      {status ? (
-                        <SlCheck color="green" />
-                      ) : (
-                        <SlExclamation color="yellow" />
+            {filteredTaskList.map(
+              ({ id, task, status, priority, createdAt }) => (
+                <div
+                  className={styles.task_box}
+                  onClick={() => {
+                    setTaskSelectedId(taskSelectedId === id ? '' : id);
+                  }}
+                  key={id}
+                >
+                  <div className={styles.task}>
+                    <div>
+                      <h3>{task}</h3>
+                      <span>{format(new Date(createdAt), 'dd.MM.yy ')}</span>
+                    </div>
+                    <div className={styles.status_task}>
+                      {!status && (
+                        <div>
+                          <h4>Priority</h4>
+                          <p
+                            className={`${priority === 'Low' && styles.low} ${
+                              priority === 'Medium' && styles.medium
+                            } ${priority === 'High' && styles.high}`}
+                          >
+                            {priority}
+                          </p>
+                        </div>
                       )}
-                    </p>
+
+                      <p>
+                        {status ? (
+                          <SlCheck color="green" />
+                        ) : (
+                          <SlExclamation color="yellow" />
+                        )}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                {taskSelectedId === id && (
-                  <div className={styles.task_control}>
-                    {!status && (
-                      <Button finished onClick={() => handlerFinishedTask(id)}>
-                        Finished
+                  {taskSelectedId === id && (
+                    <div className={styles.task_control}>
+                      {!status && (
+                        <Button
+                          finished
+                          onClick={() => handlerFinishedTask(id)}
+                        >
+                          Finished
+                        </Button>
+                      )}
+                      <Button onClick={() => handlerDeleteTask(id)} danger>
+                        Delete
                       </Button>
-                    )}
-                    <Button onClick={() => handlerDeleteTask(id)} danger>
-                      Delete
-                    </Button>
-                  </div>
-                )}
-              </div>
-            ))}
+                    </div>
+                  )}
+                </div>
+              )
+            )}
           </>
         )}
       </div>
