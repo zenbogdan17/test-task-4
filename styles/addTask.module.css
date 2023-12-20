@@ -44,3 +44,8 @@
   color: var(--grey);
   cursor: pointer;
 }
+
+@media screen and (max-width: 800px) {
+  .container {
+  }
+}

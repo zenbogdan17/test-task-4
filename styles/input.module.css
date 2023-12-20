@@ -2,10 +2,17 @@
 }
 
 .container input {
-  width: 30vw;
+  width: 40vw;
+  max-width: 500px;
   background: var(--bg2);
   padding: 10px 5px;
   border-radius: 8px;
   border: none;
   box-shadow: 2px 2px 2px var(--violet);
+}
+
+@media screen and (max-width: 800px) {
+  .container input {
+    width: 80vw;
+  }
 }

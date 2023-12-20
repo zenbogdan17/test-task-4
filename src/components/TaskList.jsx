@@ -113,17 +113,19 @@ const TaskList = ({ taskList }) => {
             <div className={styles.nav}>
               <h2 className={styles.title}>Your task</h2>
               <div className={styles.sort}>
-                <label htmlFor="sortTask">Sort Task by: </label>
-                <select
-                  id="sortTask"
-                  value={sortTask}
-                  onChange={handleSortTask}
-                >
-                  <option value="">---</option>
-                  <option value="priority">Priority</option>
-                  <option value="finished">Finished</option>
-                  <option value="date">Date</option>
-                </select>
+                <div>
+                  <label htmlFor="sortTask">Sort Task by: </label>
+                  <select
+                    id="sortTask"
+                    value={sortTask}
+                    onChange={handleSortTask}
+                  >
+                    <option value="">---</option>
+                    <option value="priority">Priority</option>
+                    <option value="finished">Finished</option>
+                    <option value="date">Date</option>
+                  </select>
+                </div>
 
                 <Button
                   onClick={() => {

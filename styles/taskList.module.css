@@ -19,7 +19,7 @@
 .sort {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
 }
 
 select {
@@ -102,6 +102,26 @@ select:focus {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.5s ease forwards;
+}
+
+@media screen and (max-width: 800px) {
+  .nav {
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .sort {
+    justify-content: space-between;
+  }
+
+  .task_box {
+    width: 80vw; /* Зменште ширину для малих екранів */
+  }
 }
 
 @keyframes fadeInUp {
