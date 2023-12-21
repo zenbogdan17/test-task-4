@@ -6,6 +6,7 @@ import AddTask from './components/AddTask';
 
 function App() {
   const [taskList, setTaskList] = useState(null);
+  const [editTask, setEditTask] = useState(null);
   const [newTask, setNewTask] = useState([]);
 
   useEffect(() => {
@@ -21,8 +22,12 @@ function App() {
 
   return (
     <div>
-      <AddTask setNewTask={(data) => setNewTask((prev) => [...prev, data])} />
-      <TaskList taskList={taskList} />
+      <AddTask
+        setNewTask={(data) => setNewTask((prev) => [...prev, data])}
+        editTask={editTask}
+        resetEdit={() => setEditTask(null)}
+      />
+      <TaskList taskList={taskList} setEditTask={(data) => setEditTask(data)} />
     </div>
   );
 }

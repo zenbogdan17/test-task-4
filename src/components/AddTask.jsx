@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './../../styles/addTask.module.css';
 import Input from './Input';
 import Button from './Button';
 import { url } from './../constants';
 import toast from 'react-hot-toast';
+import { getPriorityId } from '../utils';
 
 const items = [
   { id: 1, label: 'Low' },
@@ -11,12 +12,27 @@ const items = [
   { id: 3, label: 'High' },
 ];
 
-const AddTask = ({ setNewTask }) => {
+const AddTask = ({ setNewTask, editTask, resetEdit }) => {
   const [task, setTask] = useState('');
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const [statusTask, setStatusTask] = useState(false);
 
-  const handleCheckboxChange = (itemId) => {
+  useEffect(() => {
+    if (editTask) {
+      setTask(editTask.task);
+      setSelectedItemId(getPriorityId(editTask.priority, items));
+      setStatusTask(editTask.status);
+    }
+  }, [editTask]);
+
+  const handlePriorityCheckbox = (itemId) => {
     setSelectedItemId(itemId);
+  };
+
+  console.log(new Date());
+
+  const handleStatusCheckbox = () => {
+    setStatusTask(!statusTask);
   };
 
   const handlerSubmit = (e) => {
@@ -28,19 +44,24 @@ const AddTask = ({ setNewTask }) => {
 
     const priority = items[selectedItemId - 1].label;
 
-    fetch(url, {
-      method: 'POST',
+    fetch(editTask ? `${url}/${editTask.id}` : url, {
+      method: editTask ? 'PUT' : 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ task, priority }),
+      body: JSON.stringify({
+        task,
+        priority,
+        status: statusTask,
+        createdAt: new Date(),
+      }),
     })
       .then((response) => response.json())
       .then((data) => {
         setNewTask(data);
 
-        toast.success('Successfully added task!');
-
+        toast.success(`Successfully ${editTask ? 'edit' : 'added'} task!`);
+        resetEdit();
         setTask('');
         setSelectedItemId(null);
       })
@@ -54,7 +75,9 @@ const AddTask = ({ setNewTask }) => {
     <>
       <div className={styles.container}>
         <form className={styles.form} onSubmit={handlerSubmit}>
-          <h1 className={styles.title}>You can add your task</h1>
+          <h1 className={styles.title}>
+            {editTask ? 'Edit you tack' : ' You can add your task'}
+          </h1>
           <Input
             type="text"
             placeholder="Enter your task"
@@ -62,17 +85,39 @@ const AddTask = ({ setNewTask }) => {
             setValue={(e) => setTask(e.target.value)}
           />
           <div>
+            {editTask && (
+              <>
+                <h2 className={styles.checkbox_title}>
+                  Task status -{' '}
+                  <span>{statusTask ? 'completed' : 'in process'}</span>
+                </h2>
+                <label className={styles.toggle_switch}>
+                  <Input
+                    type="checkbox"
+                    checked={statusTask}
+                    setValue={handleStatusCheckbox}
+                  />
+                  <div className={styles.toggle_switch_background}>
+                    <div className={styles.toggle_switch_handle}></div>
+                  </div>
+                </label>
+              </>
+            )}
+
             <h2 className={styles.checkbox_title}>Task priority</h2>
             <div className={styles.checkbox}>
               {items.map((item) => (
-                <div key={item.id}>
-                  <input
+                <div
+                  key={item.id}
+                  onClick={() => handlePriorityCheckbox(item.id)}
+                >
+                  <Input
                     type="checkbox"
                     id={`checkbox-${item.id}`}
                     value={item.id}
                     checked={selectedItemId === item.id}
-                    onChange={() => handleCheckboxChange(item.id)}
                   />
+
                   <label
                     className={styles.checkbox_Label}
                     htmlFor={`checkbox-${item.id}`}
@@ -83,8 +128,11 @@ const AddTask = ({ setNewTask }) => {
               ))}
             </div>
           </div>
-
-          <Button type={'submit'}>Add</Button>
+          {editTask ? (
+            <Button type={'submit'}>Save</Button>
+          ) : (
+            <Button type={'submit'}>Add</Button>
+          )}
         </form>
       </div>
     </>

@@ -1,5 +1,5 @@
 button {
-  width: 80px;
+  min-width: 80px;
   height: 30px;
   color: var(--white);
   background-color: var(--violet);
@@ -7,7 +7,7 @@ button {
   padding: 5px;
   border-radius: 10px;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 18px;
   font-weight: bold;
   transition: all 0.5s;
   box-shadow: 2px 2px 2px var(--dark);

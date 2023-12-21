@@ -8,7 +8,7 @@ import styles from './../../styles/taskList.module.css';
 import { url } from '../constants';
 import toast from 'react-hot-toast';
 
-const TaskList = ({ taskList }) => {
+const TaskList = ({ taskList, setEditTask }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [filteredTaskList, setFilteredTaskList] = useState([]);
   const [taskSelectedId, setTaskSelectedId] = useState('');
@@ -146,6 +146,11 @@ const TaskList = ({ taskList }) => {
               ({ id, task, status, priority, createdAt }) => (
                 <div
                   className={styles.task_box}
+                  // onClick={(event) => {
+                  //   if (!event.target.closest('button')) {
+                  //     setTaskSelectedId(taskSelectedId === id ? '' : id);
+                  //   }
+                  // }}
                   onClick={() => {
                     setTaskSelectedId(taskSelectedId === id ? '' : id);
                   }}
@@ -181,6 +186,14 @@ const TaskList = ({ taskList }) => {
                   </div>
                   {taskSelectedId === id && (
                     <div className={styles.task_control}>
+                      <Button
+                        onClick={() => {
+                          setEditTask({ id, task, status, priority });
+                        }}
+                      >
+                        Edit
+                      </Button>
+
                       {!status && (
                         <Button
                           finished

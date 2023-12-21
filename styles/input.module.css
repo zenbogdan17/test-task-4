@@ -1,18 +1,20 @@
-.container {
-}
-
-.container input {
-  width: 40vw;
+input {
+  width: 50vw;
   max-width: 500px;
   background: var(--bg2);
   padding: 10px 5px;
   border-radius: 8px;
+  font-size: 20px;
   border: none;
   box-shadow: 2px 2px 2px var(--violet);
 }
 
+input::placeholder {
+  font-size: 15px;
+}
+
 @media screen and (max-width: 800px) {
-  .container input {
+  input {
     width: 80vw;
   }
 }

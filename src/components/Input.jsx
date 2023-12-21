@@ -1,17 +1,17 @@
-import React from 'react';
 import styles from './../../styles/input.module.css';
 
-const Input = ({ label, type, placeholder, value, setValue }) => {
+const Input = ({ label, type, placeholder, value, setValue, checked }) => {
   return (
-    <div className={styles.container}>
+    <>
       <label>{label}</label>
       <input
         type={type}
+        checked={checked}
         placeholder={placeholder}
         value={value}
         onChange={setValue}
       />
-    </div>
+    </>
   );
 };
 
